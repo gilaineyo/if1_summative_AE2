@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" class="govuk-template">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ title }}</title>
+        <!-- GOV.UK Frontend CSS -->
+        <link rel="stylesheet"  href="{{ url_for('static', filename='stylesheets/govuk-frontend-6.0.0.min.css') }}">
+    </head>
+    <body class="govuk-template__body">   
+        <!-- GOV.UK Frontend JS -->
+        <script>
+            window.GOVUKFrontend.initAll()
+            </script>
+
+        {% block content %}{% endblock %}
+        <script src="{{ url_for('static', filename='javascripts/govuk-frontend-6.0.0.min.js') }}"></script>
+    </body>
+</html>

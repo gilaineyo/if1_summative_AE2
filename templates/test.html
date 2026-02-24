@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="govuk-width-container">
+
+  <main class="govuk-main-wrapper" id="main-content" role="main">
+
+    <h1 class="govuk-heading-xl">GOV.UK Frontend Test Page</h1>
+    <p class="govuk-body">This page is just for experimenting with GOV.UK components inside Flask.</p>
+
+    <!-- GOV.UK Button -->
+    <a href="#" class="govuk-button" data-module="govuk-button">
+      Test button
+    </a>
+
+    <!-- GOV.UK Text Input -->
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="test-input">
+        Test input field
+      </label>
+      <input class="govuk-input" id="test-input" name="test-input" type="text">
+    </div>
+
+    <!-- GOV.UK Radios -->
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="example-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          Test radio buttons
+        </legend>
+
+        <div class="govuk-radios" data-module="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="radio-1" name="radio-example" type="radio" value="option1">
+            <label class="govuk-label govuk-radios__label" for="radio-1">
+              Option 1
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="radio-2" name="radio-example" type="radio" value="option2">
+            <label class="govuk-label govuk-radios__label" for="radio-2">
+              Option 2
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- GOV.UK Details Component -->
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Click to expand extra information
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        This is a GOV.UK details component. It’s useful for hiding explanatory text.
+      </div>
+    </details>
+
+    <!-- GOV.UK Panel -->
+    <div class="govuk-panel govuk-panel--confirmation">
+      <h2 class="govuk-panel__title">
+        Component test successful
+      </h2>
+      <div class="govuk-panel__body">
+        You are now running GOV.UK Frontend inside Flask.
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+{% endblock %}
