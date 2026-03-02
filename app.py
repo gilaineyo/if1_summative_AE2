@@ -10,5 +10,9 @@ def home():
 def getQuestion():
     return render_template("question.html", serviceName="STS knowledge check", title="Question")
 
+@app.route('/results')
+def getResults():
+    return render_template("results.html", serviceName="STS knowledge check", title="Results")
+
 if __name__ == '__main__': 
     app.run(debug=True) 
