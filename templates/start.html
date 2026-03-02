@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }} - Start
+{% endblock %}
+
+{% block header %}
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <h1 class="govuk-heading-xl">
+        {{ serviceName }}
+      </h1>
+      <p class="govuk-body">Welcome to the Schools Technology Services (STS) Knowledge Check.</p>
+      <p class="govuk-body">As a new starter on our team, this knowledge check is designed to help you to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>identify gaps in your knowledge of the team</li>
+        <li>find information you need</li>
+      </ul>
+
+      <p class="govuk-body">You will answer questions, some of which will be based on your role in the team and others that relate to information that we all need to know. When you have answered all the questions, you will be given a score and some feedback on areas you may wish to look at again.</p>
+
+      <h2 class="govuk-heading-m" id="before-you-start">
+        Before you start
+      </h2>
+      <p class="govuk-body">Enter your name and select your discipline below so that we can tailor your questions to you.</p>
+      
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="event-name">
+          Please enter your name
+        </label>
+        <input class="govuk-input" id="event-name" name="eventName" type="text">
+        <br></br>
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend">
+            What is your discipline?
+          </legend>
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discipline" name="discipline" type="radio" value="Technical">
+              <label class="govuk-label govuk-radios__label" for="discipline">
+                Technical
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discipline-2" name="discipline" type="radio" value="User centred design (UCD)">
+              <label class="govuk-label govuk-radios__label" for="discipline-2">
+                User centred design (UCD)
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discipline-3" name="discipline" type="radio" value="Product and delivery">
+              <label class="govuk-label govuk-radios__label" for="discipline-3">
+                Product and delivery
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    
+        <a href="#" class="govuk-button" data-module="govuk-button" isStartButton="true">
+          Start now
+        </a>
+    </div>
+    <div class="govuk-grid-column-one-third-from-desktop govuk-float-right">
+      <aside class="govuk-prototype-kit-common-templates-related-items govuk-!-padding-left-6" role="complementary">
+        <h2 class="govuk-heading-m govuk-!-padding-top-4" id="help-links">
+          Helpful links
+        </h2>
+        <!-- Links to internal pages are simulated using alternative hrefs -->
+        <nav role="navigation" aria-labelledby="help-links">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>
+              <a href="https://www.gov.uk/government/organisations/department-for-education" class="govuk-link">
+                STS Wiki pages
+              </a>
+            </li>
+            <li>
+              <a href="https://www.gov.uk/government/organisations/department-for-education" class="govuk-link">
+                DfE Intranet
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/DFE-Digital/sts-plan-technology-for-your-school" class="govuk-link">
+                STS on GitHub
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  </div>
+
+
+  
+{% endblock %}
