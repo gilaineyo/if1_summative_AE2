@@ -16,8 +16,7 @@ def test_create_question():
                'discipline': 'Product and Delivery', 
                'wiki_topic': '        Disaster recovery               ', 
                'wiki_href': 'https://www.get-help-buying-for-schools.service.gov.uk/procurement-support', 
-               'advice_text': 'You (or another member of the team) should alert the Service Owner and Service Delivery Manager, and ensure there is a ServiceNow incident ticket raised.'}
-    
+               'advice_text': 'You (or another member of the team) should alert the Service Owner and Service Delivery Manager, and ensure there is a ServiceNow incident ticket raised.'} 
 
     question = Question(from_csv['id'], from_csv['text'], from_csv['answer_ids'], from_csv['discipline'], from_csv['wiki_topic'], from_csv['wiki_href'], from_csv['advice_text'])
     
