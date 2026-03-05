@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session # Import flask framework and methods
 from config import Config # Import secret to enable session
-from validators import validate_form # Import user input validation method
+from validators import validate_form, validate_question # Import user input validation method
+from content.quiz_repository import QuizRepository
 
 app = Flask(__name__)
 app.secret_key = Config.SECRET_KEY 
@@ -9,8 +10,6 @@ app.secret_key = Config.SECRET_KEY
 def start(): 
     """Renders the start page and validates user input"""
     errors = {}
-    name = ""
-    discipline = ""
 
     if (request.method == 'POST'):
         errors, valid = validate_form(request.form)
@@ -19,29 +18,63 @@ def start():
                 "start.html", 
                 serviceName="STS knowledge check", 
                 title="Start STS knowledge check",
-                errors=errors,
-                name=name,
-                discipline=discipline)
+                errors=errors)
         else:
             session["user_name"] = valid["name"]
             session["discipline"] = valid["discipline"]
-            return redirect(url_for("question"))
-        
+            session["submitted_answers"] = []
+            return redirect(url_for("question", index=1))
+    
     return render_template(
                 "start.html", 
                 serviceName="STS knowledge check", 
                 title="Start STS knowledge check",
-                errors=errors,
-                name=name,
-                discipline=discipline)
+                errors=errors)
 
-@app.route('/question', methods=['GET', 'POST'])
-def question():
+@app.route('/question/<int:index>', methods=['GET', 'POST'])
+def question(index):
     """Render question pages sequentially and post user responses"""
-    return render_template("question.html", serviceName="STS knowledge check", title="Question")
+    quiz = QuizRepository("questions.csv", "answers.csv")
+    user_questions, user_answers = quiz.get_questions_and_answers_for_user(session["discipline"])
+
+    current_question = user_questions[int(index)-1]
+
+    current_answers = {}
+    for answer in user_answers:
+        if answer.question_id == current_question.id:
+            current_answers[str(answer.id)] = answer
+
+    if (request.method == 'POST'):
+        error = validate_question(request.form)
+        if error:
+            return render_template("question.html", 
+                            serviceName="STS knowledge check", 
+                            title="Question",
+                            questionText=current_question.text,
+                            questionId=current_question.id,
+                            answers=current_answers,
+                            error=error,
+                            index=index
+                            )
+        else:
+            session["submitted_answers"].append(request.form.get("answerInput"))
+            new_index = int(index) + 1
+            if new_index > len(user_questions):
+                return redirect(url_for('results'))
+            return redirect(url_for('question', index=new_index)) 
+            
+
+    return render_template("question.html", 
+                           serviceName="STS knowledge check", 
+                           title="Question",
+                           questionText=current_question.text,
+                           questionId=current_question.id,
+                           answers=current_answers,
+                           index=index
+                           )
 
 @app.route('/results', methods=['GET'])
-def getResults():
+def results():
     return render_template("results.html", serviceName="STS knowledge check", title="Results")
 
 if __name__ == '__main__': 
