@@ -2,36 +2,36 @@ id,text,question_id,is_correct
 1,Plan Tech and Digital Standards,1,TRUE
 2,Get Help Buying For Schools and School Account,1,FALSE
 3,School Account and Plan Tech ,1,FALSE
-4,GitLab,13,FALSE
-5,Azure DevOps,13,TRUE
-6,AWS Cloud Formation,13,FALSE
-7,Replit,3,FALSE
-8,Fly.io,3,FALSE
-9,Heroku,3,TRUE
-10,Contentful,4,TRUE
-11,Strapi,4,FALSE
-12,Sanity,4,FALSE
-13,Two of our environments (Dev and Test) map to a single DfE Sign-In environment (Test),5,TRUE
-14,Plan Tech doesn't authenticate users,5,FALSE
-15,"Unlike other government services, users can authenticate through DfE Sign-In or on social media",5,FALSE
-19,Immediately commit and push a change that removes the sensitive values so that they are no longer shown in the current code version,7,FALSE
-20,"Nothing, Plan Tech is open-source so keys and secrets should be pushed to GitHub",7,FALSE
-21,"Inform the Tech Lead, revert the changes, rotate all the relevant secrets and keys and raise a security incident",7,TRUE
-22,"Unit tests, integration tests, mutation testing, end-to-end (E2E) and manual testing",8,TRUE
-23,Manual QA testing for new features only,8,FALSE
-24,"Acceptance testing, performance/load testing, functional testing",8,FALSE
-25,Content - TextBody,10,FALSE
-26,Questionnaire - Section,10,FALSE
-27,Recommendation Chunk,10,TRUE
-28,Ask friends and family,11,FALSE
-29,Use the local and DfE-wide participant registers,11,TRUE
-30,Advertise in SchoolsWeek,11,FALSE
-31,fake_password,12,FALSE
-32,not_the_real_password,12,TRUE
-33,substitute_for_password,12,FALSE
-34,Refinement and clarification of acceptance criteria,14,TRUE
-35,Sign-off by the Deputy Director,14,FALSE
-36,Submission of the ticket to the Change Control Board (CCB),14,FALSE
-37,The Deputy Director,15,FALSE
-38,"The IT Service Monitoring team, via their incident reporting line",15,FALSE
-39,"The Service Owner, the Service Delivery Manager and the Major Incident Team (via a ServiceNow incident ticket)",15,TRUE
+4,GitLab,10,FALSE
+5,Azure DevOps,10,TRUE
+6,AWS Cloud Formation,10,FALSE
+7,Replit,2,FALSE
+8,Fly.io,2,FALSE
+9,Heroku,2,TRUE
+10,Contentful,3,TRUE
+11,Strapi,3,FALSE
+12,Sanity,3,FALSE
+13,Two of our environments (Dev and Test) map to a single DfE Sign-In environment (Test),4,TRUE
+14,Plan Tech doesn't authenticate users,4,FALSE
+15,"Unlike other government services, users can authenticate through DfE Sign-In or on social media",4,FALSE
+19,Immediately commit and push a change that removes the sensitive values so that they are no longer shown in the current code version,5,FALSE
+20,"Nothing, Plan Tech is open-source so keys and secrets should be pushed to GitHub",5,FALSE
+21,"Inform the Tech Lead, revert the changes, rotate all the relevant secrets and keys and raise a security incident",5,TRUE
+22,"Unit tests, integration tests, mutation testing, end-to-end (E2E) and manual testing",6,TRUE
+23,Manual QA testing for new features only,6,FALSE
+24,"Acceptance testing, performance/load testing, functional testing",6,FALSE
+25,Content - TextBody,7,FALSE
+26,Questionnaire - Section,7,FALSE
+27,Recommendation Chunk,7,TRUE
+28,Ask friends and family,8,FALSE
+29,Use the local and DfE-wide participant registers,8,TRUE
+30,Advertise in SchoolsWeek,8,FALSE
+31,fake_password,9,FALSE
+32,not_the_real_password,9,TRUE
+33,substitute_for_password,9,FALSE
+34,Refinement and clarification of acceptance criteria,11,TRUE
+35,Sign-off by the Deputy Director,11,FALSE
+36,Submission of the ticket to the Change Control Board (CCB),11,FALSE
+37,The Deputy Director,12,FALSE
+38,"The IT Service Monitoring team, via their incident reporting line",12,FALSE
+39,"The Service Owner, the Service Delivery Manager and the Major Incident Team (via a ServiceNow incident ticket)",12,TRUE

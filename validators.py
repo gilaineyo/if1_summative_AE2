@@ -28,4 +28,10 @@ def validate_name(input):
         if (re.fullmatch(r'[a-zA-Z-\s]+', input.strip())):
             return input.strip()
         else:
-            return "Your name must only contain letters, spaces and hyphens"    
+            return "Your name must only contain letters, spaces and hyphens"
+        
+def validate_question(form):
+    answer_input = form.get("answerInput", "")
+    if not answer_input:
+        return "Please select an answer"
+    return None
