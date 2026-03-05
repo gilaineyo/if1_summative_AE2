@@ -46,7 +46,7 @@
               <div class="govuk-radios" data-module="govuk-radios">
                 {% for id, answer in answers.items() %}
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="question{{ questionId }}-answer{{ id }}" name="answerInput" type="radio" value="{{ answer.text }}">
+                  <input class="govuk-radios__input" id="question{{ questionId }}-answer{{ id }}" name="answerInput" type="radio" value="{{ answer.id }}">
                   <label class="govuk-label govuk-radios__label" for="question{{ questionId }}-answer{{ id }}">
                     {{ answer.text }}
                   </label>
