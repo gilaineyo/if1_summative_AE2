@@ -1,4 +1,4 @@
-from content.quiz_content import Question, Answer
+from content.quiz_content import Question, Answer # Import classes under test
 
 def test_create_answer():
     from_csv = {'id': '37', 'text': 'The Deputy Director', 'question_id': '15', 'is_correct': 'FALSE'}
