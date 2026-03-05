@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session # Import flask framework and methods
-from validators import validate_form
+from config import Config # Import secret to enable session
+from validators import validate_form # Import user input validation method
 
-app = Flask(__name__) 
+app = Flask(__name__)
+app.secret_key = Config.SECRET_KEY 
  
 @app.route('/', methods=['GET', 'POST']) 
 def start(): 
@@ -21,6 +23,8 @@ def start():
                 name=name,
                 discipline=discipline)
         else:
+            session["user_name"] = valid["name"]
+            session["discipline"] = valid["discipline"]
             return redirect(url_for("question"))
         
     return render_template(
