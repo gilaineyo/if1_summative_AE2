@@ -60,3 +60,16 @@ class QuizRepository():
         user_questions.sort(key=lambda x: x.id)
 
         return user_questions, user_answers
+    
+    def get_question_answer_by_answer_id(self, id):
+        self.read_answers_from_csv()
+        for answer in self.answers:
+            if answer.id == id:
+                question = self.get_question_by_id(answer.question_id)
+                return question, answer
+
+    def get_question_by_id(self, id):
+        self.read_questions_from_csv()
+        for question in self.questions:
+            if question.id == id:
+                return question
