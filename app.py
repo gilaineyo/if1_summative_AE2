@@ -57,7 +57,9 @@ def question(index):
                             index=index
                             )
         else:
-            session["submitted_answers"].append(request.form.get("answerInput"))
+            submitted_answers = session.get("submitted_answers", [])
+            submitted_answers.append(request.form.get("answerInput"))
+            session["submitted_answers"] = submitted_answers
             new_index = int(index) + 1
             if new_index > len(user_questions):
                 return redirect(url_for('results'))
@@ -75,6 +77,8 @@ def question(index):
 
 @app.route('/results', methods=['GET'])
 def results():
+    answer_ids = session["submitted_answers"]
+    print(answer_ids)
     return render_template("results.html", serviceName="STS knowledge check", title="Results")
 
 if __name__ == '__main__': 
