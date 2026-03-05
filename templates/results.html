@@ -23,24 +23,15 @@
     <h2 class="govuk-heading-l  govuk-!-padding-top-4">Your answers</h2>
     <p class="govuk-body">Check the questions that you answered incorrectly for advice on where to find the information you need.</p>
         <hr class="govuk-section-break govuk-section-break--visible"></hr>
-    <h3 class="govuk-heading-m govuk-!-padding-top-4">Which services are in the STS portfolio?</h3>
-    <p class="govuk-body">You correctly answered "Plan Tech and School Account"</p>
-        <hr class="govuk-section-break govuk-section-break--visible"></hr>
-    <h3 class="govuk-heading-m govuk-!-padding-top-4">Where is the Plan Tech prototype hosted?</h3>
-    <p class="govuk-body">You answered "Figma". The correct answer was "Heroku".</p>
-    <p class="govuk-body">Visit the <a href=#>Prototype</a> section of the Wiki for more info.</p>
-        <hr class="govuk-section-break govuk-section-break--visible"></hr>
-    <h3 class="govuk-heading-m govuk-!-padding-top-4">Question 3?</h3>
-    <p class="govuk-body">Question 3 feedback</p>
-        <hr class="govuk-section-break govuk-section-break--visible"></hr>
-    <h3 class="govuk-heading-m govuk-!-padding-top-4">Question 4?</h3>
-    <p class="govuk-body">Question 4 feedback</p>
-        <hr class="govuk-section-break govuk-section-break--visible"></hr>
-    <h3 class="govuk-heading-m govuk-!-padding-top-4">Question 5?</h3>
-    <p class="govuk-body">Question 5 feedback</p>
-        <hr class="govuk-section-break govuk-section-break--visible"></hr>
-    <h3 class="govuk-heading-m govuk-!-padding-top-4">Question 6?</h3>
-    <p class="govuk-body">Question 6 feedback</p>
+    {% for q_and_a in questions_with_answers %}
+    <h3 class="govuk-heading-m govuk-!-padding-top-4">{{ q_and_a.question.text }}</h3>
+    {% if q_and_a.answer.is_correct %}
+        <p class="govuk-body">You correctly answered "{{ q_and_a.answer.text }}"</p>
+    {% else %}
+        <p class="govuk-body">Your answer, "{{ q_and_a.answer.text }}" was incorrect. Visit the <a href="{{ q_and_a.question.wiki_href }}">{{ q_and_a.question.wiki_topic }}</a> section of the Wiki to find the answer.</p>
+    {% endif %}
+    <hr class="govuk-section-break govuk-section-break--visible"></hr>
+    {% endfor %}
 </div>
 </div>
 
