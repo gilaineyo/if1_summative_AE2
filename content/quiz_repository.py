@@ -1,6 +1,7 @@
 import csv # Read and write csv module
 from pathlib import Path # To determine path to question and answer csv files
 from .quiz_content import Question, Answer # Import classes for creating Question and Answer objects
+from datetime import datetime
 
 class QuizRepository():
     def __init__(self, questions_file, answers_file):
@@ -73,3 +74,10 @@ class QuizRepository():
         for question in self.questions:
             if question.id == id:
                 return question
+            
+    def write_results_to_csv(self, name, discipline, score, total_questions):
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        with open("results.csv", mode="a", newline="", encoding="utf-8") as file:
+                writer = csv.writer(file)
+                writer.writerow([name, discipline, score, total_questions, timestamp])
