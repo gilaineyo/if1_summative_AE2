@@ -91,6 +91,8 @@ def results():
         if item["answer"].is_correct == True:
             correct = correct + 1
 
+    quiz.write_results_to_csv(session["name"], session["discipline"], correct, total_questions)
+
     return render_template("results.html", 
                            serviceName="STS knowledge check", 
                            title="Results",
