@@ -39,3 +39,24 @@ class QuizRepository():
                     row['is_correct']
                 )
                 self.answers.append(answer)
+
+    def get_questions_and_answers_for_user(self, discipline):
+        self.read_questions_from_csv()
+        self.read_answers_from_csv()
+        user_questions = []
+        user_answers = []
+
+        for question in self.questions:
+            if question.discipline == "":
+                user_questions.append(question)
+            elif question.discipline == discipline:
+                user_questions.append(question)
+
+        for question in user_questions:
+            for answer in self.answers:
+                if answer.question_id == question.id:
+                    user_answers.append(answer)
+
+        user_questions.sort(key=lambda x: x.id)
+
+        return user_questions, user_answers
