@@ -12,6 +12,26 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      {% if errors %}
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% for field, message in errors.items() %}
+              <li>
+                <a href="#">{{ message }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
       <h1 class="govuk-heading-xl">
         {{ serviceName }}
       </h1>
@@ -28,43 +48,51 @@
         Before you start
       </h2>
       <p class="govuk-body">Enter your name and select your discipline below so that we can tailor your questions to you.</p>
-      
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="event-name">
-          Please enter your name
-        </label>
-        <input class="govuk-input" id="event-name" name="eventName" type="text">
-        <br></br>
-        <fieldset class="govuk-fieldset">
-          <legend class="govuk-fieldset__legend">
-            What is your discipline?
-          </legend>
-          <div class="govuk-radios" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="discipline" name="discipline" type="radio" value="Technical">
-              <label class="govuk-label govuk-radios__label" for="discipline">
-                Technical
-              </label>
+    
+      <form action="" method="post" class="govuk-form-group" novalidate>
+        <div class="govuk-form-group {% if errors.name %}govuk-form-group--error{% endif %}">
+          <label class="govuk-label" for="name-input">
+            Please enter your name
+          </label>
+          {% if errors.name %}
+          <p id="name-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ errors.name }}
+          </p>
+          {% endif %}
+          <input class="govuk-input" id="name-input" name="nameInput" type="text" value="{{ name }}">
+        </div>
+        <div class="govuk-form-group {% if errors.discipline %}govuk-form-group--error{% endif %}">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend">
+              What is your discipline?
+            </legend>
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="discipline" name="discipline" type="radio" value="Technical">
+                <label class="govuk-label govuk-radios__label" for="discipline">
+                  Technical
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="discipline-2" name="discipline" type="radio" value="User centred design (UCD)">
+                <label class="govuk-label govuk-radios__label" for="discipline-2">
+                  User centred design (UCD)
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="discipline-3" name="discipline" type="radio" value="Product and delivery">
+                <label class="govuk-label govuk-radios__label" for="discipline-3">
+                  Product and delivery
+                </label>
+              </div>
             </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="discipline-2" name="discipline" type="radio" value="User centred design (UCD)">
-              <label class="govuk-label govuk-radios__label" for="discipline-2">
-                User centred design (UCD)
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="discipline-3" name="discipline" type="radio" value="Product and delivery">
-              <label class="govuk-label govuk-radios__label" for="discipline-3">
-                Product and delivery
-              </label>
-            </div>
-          </div>
-        </fieldset>
-      </div>
-        <!-- Change routing to invoke question method -->
-        <a href="/question" class="govuk-button" data-module="govuk-button" isStartButton="true">
+          </fieldset>
+        </div>
+        <br>
+        <button type="submit" class="govuk-button  govuk-!-spacing-top-6" data-module="govuk-button">
           Start now
-        </a>
+        </button>
+      </form>
     </div>
     <div class="govuk-grid-column-one-third-from-desktop govuk-float-right">
       <aside class="govuk-prototype-kit-common-templates-related-items govuk-!-padding-left-6" role="complementary">
