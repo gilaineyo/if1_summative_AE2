@@ -78,8 +78,25 @@ def question(index):
 @app.route('/results', methods=['GET'])
 def results():
     answer_ids = session["submitted_answers"]
-    print(answer_ids)
-    return render_template("results.html", serviceName="STS knowledge check", title="Results")
+    quiz = QuizRepository("questions.csv", "answers.csv")
+
+    questions_with_answers = []
+    for id in answer_ids:
+        question, answer = quiz.get_question_answer_by_answer_id(int(id))
+        questions_with_answers.append({ "question": question, "answer": answer })
+
+    total_questions = len(questions_with_answers)
+    correct = 0
+    for item in questions_with_answers:
+        if item["answer"].is_correct == True:
+            correct = correct + 1
+
+    return render_template("results.html", 
+                           serviceName="STS knowledge check", 
+                           title="Results",
+                           correct=correct,
+                           total_questions=total_questions,
+                           questions_with_answers=questions_with_answers)
 
 if __name__ == '__main__': 
     app.run(debug=True) 
