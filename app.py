@@ -135,5 +135,9 @@ def results():
                            total_questions=total_questions,
                            questions_with_answers=questions_with_answers)
 
+@app.errorhandler(Exception)
+def handle_exception(e):
+    return render_template("error.html", e=e), 500
+    
 if __name__ == '__main__': 
     app.run(debug=True) 

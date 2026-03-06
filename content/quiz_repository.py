@@ -1,7 +1,10 @@
 import csv # Read and write csv module
 from pathlib import Path # To determine path to question and answer csv files
 from .quiz_content import Question, Answer # Import classes for creating Question and Answer objects
-from datetime import datetime
+from datetime import datetime # Import datetime package for saving date to CSV
+import logging # Import logging package to support exception handling
+
+logger = logging.getLogger(__name__)
 
 class QuizRepository():
     """
@@ -57,6 +60,8 @@ class QuizRepository():
         
         Creates a Question object for each row by mapping columns to Question constructor parameters and appends this to the questions attribute.
 
+        Throws exceptions if unsuccessful.
+        
         Parameters
         ----------
         None
@@ -65,27 +70,35 @@ class QuizRepository():
         -------
         None - results are appended to questions attribute
         """
-        project_root = Path(__file__).parent.parent
-        questions_path = project_root / "data" / self.questions_file
-        with open(questions_path, newline='') as f:
-            rows = csv.DictReader(f, delimiter=',')
-            for row in rows:
-                question = Question(
-                    row['id'],
-                    row['text'],
-                    row['answer_ids'],
-                    row['discipline'],
-                    row['wiki_topic'],
-                    row['wiki_href'],
-                    row['advice_text'],
-                )
-                self.questions.append(question)
+        try:
+            project_root = Path(__file__).parent.parent
+            questions_path = project_root / "data" / self.questions_file
+            with open(questions_path, newline='') as f:
+                rows = csv.DictReader(f, delimiter=',')
+                for row in rows:
+                    question = Question(
+                        row['id'],
+                        row['text'],
+                        row['answer_ids'],
+                        row['discipline'],
+                        row['wiki_topic'],
+                        row['wiki_href'],
+                        row['advice_text'],
+                    )
+                    self.questions.append(question)
+        
+        except FileNotFoundError:
+            logger.error(f"Questions file not found at {questions_path}")
+        except Exception as e:
+            logger.error(f"Unexpected error reading questions: {e}")
 
     def read_answers_from_csv(self):
         """
         Reads the CSV according to the stored filename.
         
         Creates an Answer object for each row by mapping columns to Answer constructor parameters and appends this to the answers attribute.
+
+        Throws exceptions if unsuccessful.
 
         Parameters
         ----------
@@ -95,18 +108,23 @@ class QuizRepository():
         -------
         None - results are appended to answers attribute
         """
-        project_root = Path(__file__).parent.parent
-        answers_path = project_root / "data" / self.answers_file
-        with open(answers_path, newline='') as f:
-            rows = csv.DictReader(f, delimiter=',')
-            for row in rows:
-                answer = Answer(
-                    row['id'],
-                    row['text'],
-                    row['question_id'],
-                    row['is_correct']
-                )
-                self.answers.append(answer)
+        try:
+            project_root = Path(__file__).parent.parent
+            answers_path = project_root / "data" / self.answers_file
+            with open(answers_path, newline='') as f:
+                rows = csv.DictReader(f, delimiter=',')
+                for row in rows:
+                    answer = Answer(
+                        row['id'],
+                        row['text'],
+                        row['question_id'],
+                        row['is_correct']
+                    )
+                    self.answers.append(answer)
+        except FileNotFoundError:
+            logger.error(f"Questions file not found at {answers_path}")
+        except Exception as e:
+            logger.error(f"Unexpected error reading answers: {e}")
 
     def get_questions_and_answers_for_user(self, discipline):
         """
