@@ -77,7 +77,22 @@ class QuizRepository():
             
     def write_results_to_csv(self, name, discipline, score, total_questions):
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        project_root = Path(__file__).parent.parent
+        results_file = project_root / "data" / "results.csv"
 
-        with open("results.csv", mode="a", newline="", encoding="utf-8") as file:
-                writer = csv.writer(file)
-                writer.writerow([name, discipline, score, total_questions, timestamp])
+        results_headers = ["Name", "Discipline", "Score", "Total questions", "Date/time"]
+        file_exists = results_file.exists()
+
+        with open(results_file, mode="a", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=results_headers)
+
+            if not file_exists:
+                writer.writeheader()
+            
+            writer.writerow({
+                "Name": name,
+                "Discipline": discipline,
+                "Score": score,
+                "Total questions": total_questions,
+                "Date/time": timestamp
+            })
