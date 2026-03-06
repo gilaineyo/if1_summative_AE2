@@ -8,7 +8,15 @@ app.secret_key = Config.SECRET_KEY
  
 @app.route('/', methods=['GET', 'POST']) 
 def start(): 
-    """Renders the start page and validates user input"""
+    '''
+    Renders the start page and validates user input.
+
+            Parameters:
+                    none
+
+            Returns:
+                    str: rendered HTML for start page
+    '''
     errors = {}
 
     if (request.method == 'POST'):
@@ -33,7 +41,21 @@ def start():
 
 @app.route('/question/<int:index>', methods=['GET', 'POST'])
 def question(index):
-    """Render question pages sequentially and post user responses"""
+    '''
+    Renders the questions pages and processes answer submissions.
+
+    The GET method returns rendered HTML for the appropriate question page.
+    
+    The POST response validates the answer selection input, returning the rendered HTML with error components if invalid.
+
+    If the input is valid, the function stores the submitted answer in the session, increments the index and determines whether to redirect back to this route for the next question (if one exists) or redirect to the results page if all questions answered.
+
+            Parameters:
+                    index(int): index of the question to be displayed (starting at 1 for url readability)
+
+            Returns:
+                    str or flask.wrappers.Response: either rendered HTML for question page or redirect response for next indexed question page or results page
+    '''
     quiz = QuizRepository("questions.csv", "answers.csv")
     user_questions, user_answers = quiz.get_questions_and_answers_for_user(session["discipline"])
 
@@ -77,6 +99,19 @@ def question(index):
 
 @app.route('/results', methods=['GET'])
 def results():
+    '''
+    Processes answers given and renders the results page.
+
+    Gets each question and answer based on the submitted answer ids stored in session and creates a list of each question and answer in order.
+
+    Adds a point to the `correct` count for each correct answer based on its is_correct attribute. Passes information to the QuizRepository to write results to CSV.
+
+            Parameters:
+                    none
+
+            Returns:
+                    str: rendered HTML for results page
+    '''
     answer_ids = session["submitted_answers"]
     quiz = QuizRepository("questions.csv", "answers.csv")
 
@@ -100,5 +135,9 @@ def results():
                            total_questions=total_questions,
                            questions_with_answers=questions_with_answers)
 
+@app.errorhandler(Exception)
+def handle_exception(e):
+    return render_template("error.html", e=e), 500
+    
 if __name__ == '__main__': 
     app.run(debug=True) 
