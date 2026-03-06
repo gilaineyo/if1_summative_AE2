@@ -29,7 +29,6 @@ def test_validate_name_allows_upper_lower():
     assert isinstance(result, str)
     assert result == "Marisol"
     
-    
 def test_validate_name_allows_hyphen():
     input = "Mary-Jane"
     result = validate_name(input)
