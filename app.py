@@ -20,7 +20,7 @@ def start():
                 title="Start STS knowledge check",
                 errors=errors)
         else:
-            session["user_name"] = valid["name"]
+            session["name"] = valid["name"]
             session["discipline"] = valid["discipline"]
             session["submitted_answers"] = []
             return redirect(url_for("question", index=1))
