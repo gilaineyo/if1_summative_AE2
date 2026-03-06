@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session # Import flask framework and methods
 from config import Config # Import secret to enable session
 from validators import validate_form, validate_question # Import user input validation method
-from content.quiz_repository import QuizRepository
+from content.quiz_repository import QuizRepository # Import quiz repository for retrieving and processing content to and from CSV 
 
 app = Flask(__name__)
 app.secret_key = Config.SECRET_KEY 
