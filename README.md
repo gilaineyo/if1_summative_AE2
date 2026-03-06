@@ -83,6 +83,14 @@ This app is heavily dependant on content, so the code design addresses this by p
 
 ### User documentation
 
+Visit [Render](https://if1-summative-ae2.onrender.com/) to use the live app and follow the on-screen instructions.
+1. Enter your name and select the discipline (Technical, User-centred design or Product and delivery) that your role is part of.
+2. Click 'Start now'.
+3. Select an answer and click 'Continue' for each question presented (there will be 6 questions in total).
+4. Review the results page that will display after the final question.  
+
+*Please note: links contained in the feedback are for demonstration purposes only as the STS Wiki is authenticated.*
+
 ### Technical documentation
 
 This app uses Python v3.13.12, Flask v3.1.3 and pytest v9.0.2. For ease of installation the GOV.UK front-end framework is installed using compiled files, following [this installation documentation](https://frontend.design-system.service.gov.uk/install-using-precompiled-files/).
