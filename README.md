@@ -15,7 +15,8 @@ The STS Knowledge Check supports new starters in the Plan Tech team to build the
 
 As the STS knowledge check is intended for use in the civil service environment, I decided it would be appropriate to use the [GOV.UK Design System](https://design-system.service.gov.uk/) and [frontend framework](https://github.com/alphagov/govuk-frontend) for the GUI. I used the [GOV.UK prototype kit](https://prototype-kit.service.gov.uk/docs/) to create a basic prototype for this app, which I uploaded as a [GitHub repo](https://github.com/gilaineyo/if1_summative_AE2_prototype) to use as a reference during the development phase. I used screenshots from the prototype to map the user journey on [Lucid](https://lucid.app/lucidspark/6384b51c-cf97-4066-ade5-6f433bf4b858/edit?viewport_loc=-2244%2C-876%2C8269%2C4676%2C0_0&invitationId=inv_9a860dd6-f96c-4694-b7c6-47f8ee8674b8) (Figure 1). 
 
-![Prototype for quiz app](./static/assets/images/STS-knowledge-check-design.png)
+<img src="./static/assets/images/STS-knowledge-check-design.png" alt="Prototype for quiz app" width="70%" height="70%">
+
 **Figure 1**: Prototype screenshot with connected screens
 
 The user begins at the start page, entering their name and discipline, encountering an error component if information is not entered correctly. When they have entered their information and selected `Start now`, they are directed to the question pages, again encountering the error component if they attempt to proceed further without selecting an answer. When answers are selected, the user cycles through the question pages until the final answer is submitted, when they are redirected to the results page.
@@ -24,7 +25,8 @@ The user begins at the start page, entering their name and discipline, encounter
 
 Defining the requirements for the knowledge check began with a mind mapping session using Lucid (Figure 1). Referring to the prototype, I assessed each page and determined the required behaviours for the finished app. I also considered non-functional requirements such as testing, data storage, deployment, useability and accessibility.
 
-![Requirements mapping exercise](./static/assets/images/requirements-mapping.png)
+<img src="./static/assets/images/requirements-mapping.png" alt="Requirements mapping exercise" width="70%" height="70%">
+
 **Figure 2**: Requirements mapping exercise
 
 The mind mapping exercise was analysed and refined to generate the functional and non-functional requirements for the app (Table 1). Some initial ideas were discarded as not appropriate for a minimum viable product (MVP), such as allowing a user to traverse back through the question flow to change answers given previously. Other requirements, including those around input validation errors, were expanded and broken down into several requirements upon deeper analysis.
@@ -54,6 +56,18 @@ The mind mapping exercise was analysed and refined to generate the functional an
 | Non-functional  | NFR5 | Testing | Manual testing carried out |
 | Non-functional  | NFR6 | Deployment | App deployed to Render for user access |
 
+<br>
+Following requirements definition, I created user stories and features in [Azure DevOps](https://azure.microsoft.com/en-us/products/devops) to manage the work required for the build (Figure 3) and supported this with a branching strategy, creating feature branches and merging each into `main` when complete (Figure 4).  
+
+<br>
+<img src="./static/assets/images/azure-devops-backlog.png" alt="Azure DevOps backlog" width="70%" height="70%">
+
+**Figure 3**: Backlog for STS knowledge check
+
+<img src="./static/assets/images/branching-strategy.png" alt="Git commits timeline" width="30%" height="30%">
+
+**Figure 4**: Git commits timeline
+
 ### Tech stack outline
 
 The requirement to use a GOV.UK design has a significant impact on the tech stack. As this is a Python app, the [Flask framework](https://flask.palletsprojects.com/en/stable/) is a logical choice, as it provides good support for the GOV.UK frontend and has been used in other GOV.UK projects. Flask is also well documented, meaning that startup will be relatively straightforward.
@@ -68,10 +82,11 @@ Deployment of the app for access by users will be on [Render]( https://render.co
 
 ### Code design
 
-This app is heavily dependant on content, so the code design addresses this by providing classes for questions and answers, both of which inherit from a `QuizContent` class containing their shared properties (Figure 3). The `QuizRepository` class handles the retrieval of data from CSV and, through its 'get' methods, creates instances of the `Question` and `Answer` classes for serving to the app.
+This app is heavily dependant on content, so the code design addresses this by providing classes for questions and answers, both of which inherit from a `QuizContent` class containing their shared properties (Figure 5). The `QuizRepository` class handles the retrieval of data from CSV and, through its 'get' methods, creates instances of the `Question` and `Answer` classes for serving to the app.
 
-![Class diagram for content classes](./static/assets/images/class-diagram.png)
-**Figure 3**: Class diagram for content classes
+<img src="./static/assets/images/class-diagram.png" alt="Class diagram for content classes" width="50%" height="50%">  
+
+**Figure 5**: Class diagram for content classes
 
 ## Development
 
