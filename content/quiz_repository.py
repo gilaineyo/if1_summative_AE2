@@ -61,7 +61,7 @@ class QuizRepository():
         Creates a Question object for each row by mapping columns to Question constructor parameters and appends this to the questions attribute.
 
         Throws exceptions if unsuccessful.
-        
+
         Parameters
         ----------
         None
@@ -231,7 +231,21 @@ class QuizRepository():
         This method does not return a value, it writes a new row to `results.csv`. 
         """
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
+        project_root = Path(__file__).parent.parent
+        results_file = project_root / "data" / "results.csv"
+        
+        file_exists = results_file.exists()
+        headers = ["Name", "Discipline", "Score", "Total questions", "Date/time"]
+        
         with open("results.csv", mode="a", newline="", encoding="utf-8") as file:
-                writer = csv.writer(file)
-                writer.writerow([name, discipline, score, total_questions, timestamp])
+                writer = csv.DictWriter(file, fieldnames=headers)
+
+                if not file_exists:
+                    writer.writeheader()
+                writer.writerow({
+                    "Name": name, 
+                    "Discipline": discipline, 
+                    "Score": score, 
+                    "Total questions": total_questions, 
+                    "Date/time": timestamp
+                    })
